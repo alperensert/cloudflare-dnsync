@@ -1,5 +1,4 @@
-﻿using CloudflareDnsync.Abstractions;
-using CloudflareDnsync.Models;
+﻿using CloudflareDnsync.Models;
 using Newtonsoft.Json;
 
 namespace CloudflareDnsync.Services;

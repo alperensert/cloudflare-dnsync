@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using CloudflareDnsync.Abstractions;
 using CloudflareDnsync.Models;
 using CloudflareDnsync.Models.Responses;
 using Newtonsoft.Json;
