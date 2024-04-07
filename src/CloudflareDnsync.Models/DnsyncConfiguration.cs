@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CloudflareDnsync.Models;
 
-public sealed class DnsyConfiguration
+public sealed class DnsyncConfiguration
 {
     [JsonProperty("name")]
     public string Name { get; set; } = null!;

@@ -12,7 +12,7 @@ public sealed class DnsyncConfigService : IDnsyncConfigService
         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
         ConfigurationFile);
 
-    private readonly List<DnsyConfiguration> _configurations = [];
+    private readonly List<DnsyncConfiguration> _configurations = [];
 
     public DnsyncConfigService()
     {
@@ -26,22 +26,22 @@ public sealed class DnsyncConfigService : IDnsyncConfigService
         _configurations = configRetrievingTask.Result;
     }
 
-    public IEnumerable<DnsyConfiguration> GetAll()
+    public IEnumerable<DnsyncConfiguration> GetAll()
         => _configurations;
 
-    public DnsyConfiguration? GetById(string id)
+    public DnsyncConfiguration? GetById(string id)
         => _configurations.FirstOrDefault(c => c.ZoneId == id);
 
-    public DnsyConfiguration? GetByName(string name)
+    public DnsyncConfiguration? GetByName(string name)
         => _configurations.FirstOrDefault(c => c.Name == name);
 
-    public Task AddAsync(DnsyConfiguration configuration, CancellationToken cancellationToken = default)
+    public Task AddAsync(DnsyncConfiguration configuration, CancellationToken cancellationToken = default)
     {
         _configurations.Add(configuration);
         return SaveAsync(cancellationToken);
     }
 
-    public Task RemoveAsync(DnsyConfiguration configuration, CancellationToken cancellationToken = default)
+    public Task RemoveAsync(DnsyncConfiguration configuration, CancellationToken cancellationToken = default)
     {
         _configurations.Remove(configuration);
         return SaveAsync(cancellationToken);
@@ -61,15 +61,15 @@ public sealed class DnsyncConfigService : IDnsyncConfigService
         return File.WriteAllTextAsync(_configPath, json, cancellationToken);
     }
 
-    private async Task<List<DnsyConfiguration>> RetrieveConfigAsync(CancellationToken cancellationToken = default)
+    private async Task<List<DnsyncConfiguration>> RetrieveConfigAsync(CancellationToken cancellationToken = default)
     {
         var json = await File.ReadAllTextAsync(_configPath, cancellationToken);
-        return JsonConvert.DeserializeObject<List<DnsyConfiguration>>(json)!;
+        return JsonConvert.DeserializeObject<List<DnsyncConfiguration>>(json)!;
     }
 
     private Task CreateConfigAsync(CancellationToken cancellationToken = default)
     {
-        List<DnsyConfiguration> configurations = [];
+        List<DnsyncConfiguration> configurations = [];
         var json = JsonConvert.SerializeObject(configurations, Formatting.Indented);
         return File.WriteAllTextAsync(_configPath, json, cancellationToken);
     }
