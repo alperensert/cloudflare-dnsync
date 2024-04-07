@@ -33,6 +33,9 @@ public class CloudflareService : ICloudflareService
     public Task<CloudflareResponse<List<Zone>>> GetZonesAsync(int page = 1, int perPage = 20)
         => SendAsync<CloudflareResponse<List<Zone>>>(HttpMethod.Get, $"zones?page={page}&per_page={perPage}");
 
+    public Task<CloudflareResponse<TokenVerify>> VerifyTokenAsync()
+        => SendAsync<CloudflareResponse<TokenVerify>>(HttpMethod.Get, "user/tokens/verify");
+
     private async Task<TResult> SendAsync<TResult>(HttpMethod method, string url, object? data = null)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, url);
