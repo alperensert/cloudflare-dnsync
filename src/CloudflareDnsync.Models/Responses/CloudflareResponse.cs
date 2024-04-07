@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 
 namespace CloudflareDnsync.Models.Responses;
 
 public class CloudflareResponse<T>
 {
+    [MemberNotNullWhen(true, nameof(Result))]
     [JsonProperty("success")]
     public bool Success { get; init; }
 
