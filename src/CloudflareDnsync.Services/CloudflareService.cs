@@ -30,8 +30,8 @@ public class CloudflareService : ICloudflareService
             _httpClient.BaseAddress = new Uri(baseAddress);
     }
 
-    public Task<CloudflareResponse<List<Zone>>> GetZonesAsync()
-        => SendAsync<CloudflareResponse<List<Zone>>>(HttpMethod.Get, "zones");
+    public Task<CloudflareResponse<List<Zone>>> GetZonesAsync(int page = 1, int perPage = 20)
+        => SendAsync<CloudflareResponse<List<Zone>>>(HttpMethod.Get, $"zones?page={page}&per_page={perPage}");
 
     private async Task<TResult> SendAsync<TResult>(HttpMethod method, string url, object? data = null)
     {
