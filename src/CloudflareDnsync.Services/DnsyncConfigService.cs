@@ -12,6 +12,8 @@ public sealed class DnsyncConfigService : IDnsyncConfigService
         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
         ConfigurationFile);
 
+    private readonly List<DnsyConfiguration> _configurations = [];
+
     public DnsyncConfigService()
     {
         if (!IsConfigExists)
@@ -19,13 +21,57 @@ public sealed class DnsyncConfigService : IDnsyncConfigService
             var configCreationTask = CreateConfigAsync();
             configCreationTask.Wait();
         }
+        var configRetrievingTask = RetrieveConfigAsync();
+        configRetrievingTask.Wait();
+        _configurations = configRetrievingTask.Result;
     }
 
-    private Task CreateConfigAsync()
+    public IEnumerable<DnsyConfiguration> GetAll()
+        => _configurations;
+
+    public DnsyConfiguration? GetById(string id)
+        => _configurations.FirstOrDefault(c => c.ZoneId == id);
+
+    public DnsyConfiguration? GetByName(string name)
+        => _configurations.FirstOrDefault(c => c.Name == name);
+
+    public Task AddAsync(DnsyConfiguration configuration, CancellationToken cancellationToken = default)
+    {
+        _configurations.Add(configuration);
+        return SaveAsync(cancellationToken);
+    }
+
+    public Task RemoveAsync(DnsyConfiguration configuration, CancellationToken cancellationToken = default)
+    {
+        _configurations.Remove(configuration);
+        return SaveAsync(cancellationToken);
+    }
+
+    public Task RemoveByNameAsync(string name, CancellationToken cancellationToken = default)
+    {
+        var configuration = _configurations.FirstOrDefault(c => c.Name == name);
+        if (configuration is not null)
+            return RemoveAsync(configuration, cancellationToken);
+        return Task.CompletedTask;
+    }
+
+    private Task SaveAsync(CancellationToken cancellationToken = default)
+    {
+        var json = JsonConvert.SerializeObject(_configurations, Formatting.Indented);
+        return File.WriteAllTextAsync(_configPath, json, cancellationToken);
+    }
+
+    private async Task<List<DnsyConfiguration>> RetrieveConfigAsync(CancellationToken cancellationToken = default)
+    {
+        var json = await File.ReadAllTextAsync(_configPath, cancellationToken);
+        return JsonConvert.DeserializeObject<List<DnsyConfiguration>>(json)!;
+    }
+
+    private Task CreateConfigAsync(CancellationToken cancellationToken = default)
     {
         List<DnsyConfiguration> configurations = [];
         var json = JsonConvert.SerializeObject(configurations, Formatting.Indented);
-        return File.WriteAllTextAsync(_configPath, json);
+        return File.WriteAllTextAsync(_configPath, json, cancellationToken);
     }
 
     private bool IsConfigExists => File.Exists(_configPath);
