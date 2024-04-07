@@ -17,5 +17,5 @@ public class TokenVerify
     public DateTime ExpiresOn { get; init; }
 
     [JsonIgnore]
-    public bool IsValid => Status == "active" && DateTime.UtcNow >= NotBefore && DateTime.UtcNow <= ExpiresOn;
+    public bool IsValid => Status == "active";
 }
