@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using CloudflareDnsync.Abstractions;
+using CloudflareDnsync.Models;
+using CloudflareDnsync.Models.Responses;
 using Newtonsoft.Json;
 
 namespace CloudflareDnsync.Services;
@@ -27,6 +29,9 @@ public class CloudflareService : ICloudflareService
         if (baseAddress is not null)
             _httpClient.BaseAddress = new Uri(baseAddress);
     }
+
+    public Task<CloudflareResponse<List<Zone>>> GetZonesAsync()
+        => SendAsync<CloudflareResponse<List<Zone>>>(HttpMethod.Get, "zones");
 
     private async Task<TResult> SendAsync<TResult>(HttpMethod method, string url, object? data = null)
     {
