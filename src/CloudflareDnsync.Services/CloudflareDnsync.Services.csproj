@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CloudflareDnsync.Abstractions\CloudflareDnsync.Abstractions.csproj" />
+    <ProjectReference Include="..\CloudflareDnsync.Models\CloudflareDnsync.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

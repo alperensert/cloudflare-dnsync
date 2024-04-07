@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudflareDnsync.Services",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudflareDnsync.Abstractions", "src\CloudflareDnsync.Abstractions\CloudflareDnsync.Abstractions.csproj", "{46E2C087-1871-4EEC-B96A-4F52E97829F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudflareDnsync.Models", "src\CloudflareDnsync.Models\CloudflareDnsync.Models.csproj", "{4A11B82F-DFA4-4BC9-999A-1D58B9771A18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{46E2C087-1871-4EEC-B96A-4F52E97829F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46E2C087-1871-4EEC-B96A-4F52E97829F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46E2C087-1871-4EEC-B96A-4F52E97829F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A11B82F-DFA4-4BC9-999A-1D58B9771A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A11B82F-DFA4-4BC9-999A-1D58B9771A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A11B82F-DFA4-4BC9-999A-1D58B9771A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A11B82F-DFA4-4BC9-999A-1D58B9771A18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +43,6 @@ Global
 		{5B7CD32D-1472-47E7-8959-14D7618AC151} = {0DF04433-43F6-45C9-86BA-744356BC7810}
 		{91D9B0C3-11A7-4849-87D3-527A39534742} = {0DF04433-43F6-45C9-86BA-744356BC7810}
 		{46E2C087-1871-4EEC-B96A-4F52E97829F3} = {0DF04433-43F6-45C9-86BA-744356BC7810}
+		{4A11B82F-DFA4-4BC9-999A-1D58B9771A18} = {0DF04433-43F6-45C9-86BA-744356BC7810}
 	EndGlobalSection
 EndGlobal
