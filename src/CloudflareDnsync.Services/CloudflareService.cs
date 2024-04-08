@@ -56,6 +56,15 @@ public class CloudflareService : ICloudflareService
             $"zones/{zoneId}/dns_records?page={page}&per_page={perPage}&type=A",
             cancellationToken: cancellationToken);
 
+    public Task<CloudflareResponse<DnsRecord>> GetDnsRecordAsync(
+        string zoneId,
+        string recordId,
+        CancellationToken cancellationToken = default)
+        => SendAsync<CloudflareResponse<DnsRecord>>(
+            HttpMethod.Get,
+            $"zones/{zoneId}/dns_records/{recordId}",
+            cancellationToken: cancellationToken);
+
     public Task<CloudflareResponse<DnsRecord>> UpdateDnsRecordAsync(
         string zoneId,
         string recordId,

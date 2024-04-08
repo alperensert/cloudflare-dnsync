@@ -51,6 +51,21 @@ public interface ICloudflareService : IDisposable
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Retrieves a DNS record for a zone from Cloudflare.
+    /// </summary>
+    /// <param name="zoneId">The ID of the dns record's zone.</param>
+    /// <param name="recordId">The ID of the dns record.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>
+    /// A task that represents the asynchronous operation.
+    /// The task result contains the Cloudflare response containing the DNS record.
+    /// </returns>
+    Task<CloudflareResponse<DnsRecord>> GetDnsRecordAsync(
+        string zoneId,
+        string recordId,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Updates a DNS record for a zone in Cloudflare.
     /// </summary>
     /// <param name="zoneId">The ID of the zone to update the DNS record for.</param>
