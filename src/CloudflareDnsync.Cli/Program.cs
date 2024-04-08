@@ -31,6 +31,8 @@ app.Configure(config =>
         cfg.AddCommand<AddCommand>("add");
         cfg.AddCommand<ListCommand>("list")
             .WithAlias("ls");
+        cfg.AddCommand<RemoveCommand>("remove")
+            .WithAlias("rm");
     }).WithAlias("cfg");
 });
 
