@@ -49,4 +49,21 @@ public interface ICloudflareService
         int page = 1,
         int perPage = 20,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Updates a DNS record for a zone in Cloudflare.
+    /// </summary>
+    /// <param name="zoneId">The ID of the zone to update the DNS record for.</param>
+    /// <param name="recordId">The ID of the dns record</param>
+    /// <param name="request">The request containing the updated DNS record data.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>
+    /// A task that represents the asynchronous operation.
+    /// The task result contains the Cloudflare response containing the updated DNS record.
+    /// </returns>
+    Task<CloudflareResponse<DnsRecord>> UpdateDnsRecordAsync(
+        string zoneId,
+        string recordId,
+        DnsRecordUpdateRequest request,
+        CancellationToken cancellationToken = default);
 }
