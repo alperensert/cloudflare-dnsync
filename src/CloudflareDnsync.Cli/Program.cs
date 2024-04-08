@@ -1,11 +1,20 @@
 ﻿using CloudflareDnsync.Cli.Infrastructure;
 using CloudflareDnsync.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using Spectre.Console.Cli;
 
 var serviceCollection = new ServiceCollection();
 
 serviceCollection.AddSingleton<IDnsyncConfigService, DnsyncConfigService>();
+serviceCollection.AddLogging(builder =>
+{
+    var logger = new LoggerConfiguration()
+        .MinimumLevel.Debug()
+        .WriteTo.Console()
+        .CreateLogger();
+    builder.AddSerilog(logger);
+});
 
 var registrar = new TypeRegistrar(serviceCollection);
 
