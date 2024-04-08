@@ -7,6 +7,8 @@ namespace CloudflareDnsync.Services;
 
 public class CloudflareService : ICloudflareService
 {
+    private bool _disposed;
+
     private const string BaseUrl = "https://api.cloudflare.com/client/v4/";
 
     private readonly HttpClient _httpClient = new()
@@ -104,4 +106,15 @@ public class CloudflareService : ICloudflareService
         var content = await response.Content.ReadAsStringAsync(cancellationToken);
         return JsonConvert.DeserializeObject<TResult>(content)!;
     }
+
+    public void Dispose()
+    {
+        if (_disposed)
+            return;
+        _httpClient.Dispose();
+        _disposed = true;
+        GC.SuppressFinalize(this);
+    }
+
+    ~CloudflareService() => Dispose();
 }

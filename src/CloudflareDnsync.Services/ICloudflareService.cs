@@ -6,7 +6,7 @@ namespace CloudflareDnsync.Services;
 /// <summary>
 /// Represents a service for interacting with the Cloudflare API.
 /// </summary>
-public interface ICloudflareService
+public interface ICloudflareService : IDisposable
 {
     /// <summary>
     /// Retrieves a list of zones from Cloudflare.
