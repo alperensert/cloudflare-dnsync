@@ -27,8 +27,11 @@ app.Configure(config =>
     config.SetApplicationVersion("1.0.0");
     config.AddBranch<ConfigurationCommand.ConfigurationSettings>("config", cfg =>
     {
+        cfg.SetDefaultCommand<ListCommand>();
         cfg.AddCommand<AddCommand>("add");
-    });
+        cfg.AddCommand<ListCommand>("list")
+            .WithAlias("ls");
+    }).WithAlias("cfg");
 });
 
 return await app.RunAsync(args);
