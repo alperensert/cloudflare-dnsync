@@ -35,6 +35,14 @@ public class CloudflareService : ICloudflareService
     public Task<CloudflareResponse<TokenVerify>> VerifyTokenAsync()
         => SendAsync<CloudflareResponse<TokenVerify>>(HttpMethod.Get, "user/tokens/verify");
 
+    public Task<CloudflareResponse<List<DnsRecord>>> GetDnsRecordsAsync(
+        string zoneId,
+        int page = 1,
+        int perPage = 20)
+        => SendAsync<CloudflareResponse<List<DnsRecord>>>(
+            HttpMethod.Get,
+            $"zones/{zoneId}/dns_records?page={page}&per_page={perPage}&type=A");
+
     private async Task<TResult> SendAsync<TResult>(HttpMethod method, string url, object? data = null)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, url);
