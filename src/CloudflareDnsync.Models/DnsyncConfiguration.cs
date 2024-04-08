@@ -29,6 +29,9 @@ public sealed class DnsyncConfiguration
     [JsonProperty("record_type")]
     public RecordType Type { get; set; }
 
+    [JsonProperty("enabled")]
+    public bool Enabled { get; set; } = true;
+
     [JsonIgnore]
     [MemberNotNullWhen(false, nameof(ApiKey))]
     [MemberNotNullWhen(false, nameof(ApiEmail))]
