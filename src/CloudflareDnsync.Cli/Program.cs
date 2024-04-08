@@ -21,10 +21,13 @@ var registrar = new TypeRegistrar(serviceCollection);
 
 var app = new CommandApp(registrar);
 
+app.SetDefaultCommand<SyncCommand>().WithDescription("Sync DNS records with Cloudflare");
 app.Configure(config =>
 {
     config.SetApplicationName("cloudflare-dnsync");
     config.SetApplicationVersion("1.0.0");
+    config.AddCommand<SyncCommand>("sync")
+        .WithDescription("Sync DNS records with Cloudflare");
     config.AddBranch<ConfigurationCommand.ConfigurationSettings>("config", cfg =>
     {
         cfg.SetDefaultCommand<ListCommand>();
