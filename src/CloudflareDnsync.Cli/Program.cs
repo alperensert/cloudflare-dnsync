@@ -1,5 +1,4 @@
-﻿
-using CloudflareDnsync.Cli.Infrastructure;
+﻿using CloudflareDnsync.Cli.Infrastructure;
 using CloudflareDnsync.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
