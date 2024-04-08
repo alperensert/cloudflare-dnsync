@@ -66,6 +66,18 @@ public class CloudflareService : ICloudflareService
             ignoreNullValues: true,
             cancellationToken: cancellationToken);
 
+    /// <summary>
+    /// Sends an HTTP request to the specified URL and returns the response as a deserialized object.
+    /// </summary>
+    /// <typeparam name="TResult">Result will deserialized to this type.</typeparam>
+    /// <param name="method">Http method to sending http request.</param>
+    /// <param name="url">Request URL.</param>
+    /// <param name="data">Optional request data, it will be sent as UTF-8 and "application/json".</param>
+    /// <param name="ignoreNullValues">If true, null values will be ignored while serializing the data.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>
+    /// Deserialized object of the response.
+    /// </returns>
     private async Task<TResult> SendAsync<TResult>(
         HttpMethod method,
         string url,
