@@ -1,4 +1,5 @@
-﻿using CloudflareDnsync.Cli.Infrastructure;
+﻿using CloudflareDnsync.Cli.Commands;
+using CloudflareDnsync.Cli.Infrastructure;
 using CloudflareDnsync.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -24,6 +25,10 @@ app.Configure(config =>
 {
     config.SetApplicationName("cloudflare-dnsync");
     config.SetApplicationVersion("1.0.0");
+    config.AddBranch<ConfigurationCommand.ConfigurationSettings>("config", cfg =>
+    {
+        cfg.AddCommand<AddCommand>("add");
+    });
 });
 
 return await app.RunAsync(args);
