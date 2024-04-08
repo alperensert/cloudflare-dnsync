@@ -63,18 +63,29 @@ public class CloudflareService : ICloudflareService
             HttpMethod.Put,
             $"zones/{zoneId}/dns_records/{recordId}",
             request,
-            cancellationToken);
+            ignoreNullValues: true,
+            cancellationToken: cancellationToken);
 
     private async Task<TResult> SendAsync<TResult>(
         HttpMethod method,
         string url,
         object? data = null,
+        bool? ignoreNullValues = null,
         CancellationToken cancellationToken = default)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         if (data is not null && (method == HttpMethod.Patch || method == HttpMethod.Post || method == HttpMethod.Put))
         {
-            var json = JsonConvert.SerializeObject(data);
+            string? json;
+            if (ignoreNullValues is true)
+                json = JsonConvert.SerializeObject(
+                    data,
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
+            else
+                json = JsonConvert.SerializeObject(data);
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
         }
         var response = await _httpClient.SendAsync(request, cancellationToken);
