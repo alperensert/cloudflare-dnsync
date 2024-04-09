@@ -22,9 +22,9 @@ public sealed class IPService(ILogger<IPService> logger) : IIPService
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync(cancellationToken);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                logger.LogWarning(ex, "Failed to retrieve public IP from {Provider}", provider.Host);
+                logger.LogWarning("Failed to retrieve public IP from {Provider}", provider.Host);
             }
         }
         throw new Exception("Failed to retrieve public IP from all providers");
