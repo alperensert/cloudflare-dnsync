@@ -1,4 +1,5 @@
-﻿using CloudflareDnsync.Models;
+﻿using System.Linq.Expressions;
+using CloudflareDnsync.Models;
 using Newtonsoft.Json;
 
 namespace CloudflareDnsync.Services;
@@ -23,6 +24,13 @@ public sealed class DnsyncConfigService : IDnsyncConfigService
         var configRetrievingTask = RetrieveConfigAsync();
         configRetrievingTask.Wait();
         _configurations = configRetrievingTask.Result;
+    }
+
+    public List<DnsyncConfiguration> Get(Expression<Func<DnsyncConfiguration, bool>>? predicate = null)
+    {
+        if (predicate is null)
+            return _configurations;
+        return _configurations.Where(predicate.Compile()).ToList();
     }
 
     public IEnumerable<DnsyncConfiguration> GetAll()
@@ -52,6 +60,14 @@ public sealed class DnsyncConfigService : IDnsyncConfigService
         if (configuration is not null)
             return RemoveAsync(configuration, cancellationToken);
         return Task.CompletedTask;
+    }
+
+    public Task UpdateAsync(DnsyncConfiguration configuration, CancellationToken cancellationToken = default)
+    {
+        var index = _configurations.FindIndex(c => c.Name == configuration.Name);
+        if (index != -1)
+            _configurations[index] = configuration;
+        return SaveAsync(cancellationToken);
     }
 
     private Task SaveAsync(CancellationToken cancellationToken = default)
