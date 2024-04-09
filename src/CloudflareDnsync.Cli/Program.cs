@@ -8,6 +8,7 @@ using Spectre.Console.Cli;
 var serviceCollection = new ServiceCollection();
 
 serviceCollection.AddSingleton<IDnsyncConfigService, DnsyncConfigService>();
+serviceCollection.AddSingleton<IIPService, IPService>();
 serviceCollection.AddLogging(builder =>
 {
     var logger = new LoggerConfiguration()
