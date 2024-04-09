@@ -13,6 +13,12 @@ dotnet tool install cloudflare-dnsync --global
 - Remove a dns record from the configuration: `cloudflare-dnsync config rm`
 - List dns record configurations: `cloudflare-dnsync config ls`
 
+### Planned features
+- [ ] Docker support
+- [ ] IPv6 support
+- [ ] Customizable external IP address providers
+- [ ] Automatic configuration setup based on dns records comments
+
 ### Motivation
 I purchased a [Bee-Link Mini S12](https://amzn.eu/d/a3wNyZN) to serve as my home server. Despite being unable to obtain a static IP address from my internet provider, I developed this project as a CLI tool to automatically update my DNS records.
 
