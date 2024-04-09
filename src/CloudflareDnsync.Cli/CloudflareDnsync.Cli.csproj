@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CloudflareDnsync.Services\CloudflareDnsync.Services.csproj" />
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,20 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <Version>0.1.0</Version>
+    <Authors>Alperen SERT</Authors>
+    <Description>Updates Cloudflare DNS records with latest IP address of your device.</Description>
+    <PackageTags>dotnet-core cloudflare-dnsync cloudflare dns-updater cli tool</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/alperensert/cloudflare-dnsync</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alperensert/cloudflare-dnsync</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>cloudflare-dnsync</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
   </PropertyGroup>
 
 </Project>
