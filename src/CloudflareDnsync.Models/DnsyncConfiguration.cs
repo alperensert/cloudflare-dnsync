@@ -32,6 +32,9 @@ public sealed class DnsyncConfiguration
     [JsonProperty("enabled")]
     public bool Enabled { get; set; } = true;
 
+    [JsonProperty("content")]
+    public string? Content { get; set; }
+
     [JsonIgnore]
     [MemberNotNullWhen(false, nameof(ApiKey))]
     [MemberNotNullWhen(false, nameof(ApiEmail))]
