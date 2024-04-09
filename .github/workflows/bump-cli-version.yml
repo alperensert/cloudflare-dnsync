@@ -1,0 +1,29 @@
+name: Bump CLI project version
+
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'version.txt'
+
+jobs:
+  bump-version:
+    if: contains('["release-please"]', github.actor)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - run: chmod +x ./scripts/bump-version.sh
+      - run: ./scripts/bump-version.sh
+      - id: determine_version
+        run: echo "version=$(cat version.txt)" >> "$GITHUB_OUTPUT"
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: bump cli project version to ${{ steps.determine_version.outputs.version }}"
+          branch: ${{ github.head_ref }}
+
+
+  
