@@ -26,7 +26,6 @@ app.SetDefaultCommand<SyncCommand>().WithDescription("Sync DNS records with Clou
 app.Configure(config =>
 {
     config.SetApplicationName("cloudflare-dnsync");
-    config.SetApplicationVersion("1.0.0");
     config.AddCommand<SyncCommand>("sync")
         .WithDescription("Sync DNS records with Cloudflare");
     config.AddBranch<ConfigurationCommand.ConfigurationSettings>("config", cfg =>
