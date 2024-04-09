@@ -16,7 +16,9 @@ jobs:
           dotnet-version: "8.x"
       - run: dotnet restore
       - run: chmod +x version_bump.sh
+        working-directory: src/CloudflareDnsync.Cli
       - run: ./version_bump.sh ${{ github.event.release.tag_name }}
+        working-directory: src/CloudflareDnsync.Cli
       - run: dotnet pack -c Release /p:PackageVersion=${{ github.event.release.tag_name }}
         working-directory: src/CloudflareDnsync.Cli
       - run: dotnet nuget push ./nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_PUBLISH_KEY }}
