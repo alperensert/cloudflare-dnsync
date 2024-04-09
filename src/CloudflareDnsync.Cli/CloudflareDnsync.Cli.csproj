@@ -19,7 +19,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <Version>0.0.0</Version>
+    <AssemblyName>cloudflare-dnsync</AssemblyName>
+    <Version>1.0.0</Version>
     <PackageId>cloudflare-dnsync</PackageId>
     <Authors>Alperen SERT</Authors>
     <Description>Updates Cloudflare DNS records with latest IP address of your device.</Description>
@@ -33,6 +34,10 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>cloudflare-dnsync</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
+
+    <DebugType>none</DebugType>
+    <RuntimeIdentifiers>osx-arm64;linux-musl-x64;linux-x64;</RuntimeIdentifiers>
+    <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
 
 </Project>
