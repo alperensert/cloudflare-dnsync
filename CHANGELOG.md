@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/alperensert/cloudflare-dnsync/compare/v1.0.0...1.0.1) (2024-04-09)
+
+
+### Bug Fixes
+
+* version bump shell script fixed ([5f97eb7](https://github.com/alperensert/cloudflare-dnsync/commit/5f97eb7fff467879d9a03a8973f6b6a2fe2cc99f))
+
 ## 1.0.0 (2024-04-09)
 
 
