@@ -80,6 +80,8 @@ public sealed partial class AddCommand(ILogger<AddCommand> logger, IDnsyncConfig
                 await configService.AddAsync(new DnsyncConfiguration
                 {
                     Name = name,
+                    RecordName = record.Name,
+                    Content = record.Content,
                     Token = token,
                     ZoneId = zone.Id,
                     Id = record.Id,

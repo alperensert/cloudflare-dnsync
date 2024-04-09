@@ -20,6 +20,9 @@ public sealed class DnsyncConfiguration
     [JsonProperty("record_id")]
     public string Id { get; set; } = null!;
 
+    [JsonProperty("record_name")]
+    public string? RecordName { get; set; }
+
     [JsonProperty("zone_id")]
     public string ZoneId { get; set; } = null!;
 
