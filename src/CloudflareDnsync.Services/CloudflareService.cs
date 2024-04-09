@@ -71,7 +71,7 @@ public class CloudflareService : ICloudflareService
         DnsRecordUpdateRequest request,
         CancellationToken cancellationToken = default)
         => SendAsync<CloudflareResponse<DnsRecord>>(
-            HttpMethod.Put,
+            HttpMethod.Patch,
             $"zones/{zoneId}/dns_records/{recordId}",
             request,
             ignoreNullValues: true,
@@ -96,7 +96,7 @@ public class CloudflareService : ICloudflareService
         bool? ignoreNullValues = null,
         CancellationToken cancellationToken = default)
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        var request = new HttpRequestMessage(method, url);
         if (data is not null && (method == HttpMethod.Patch || method == HttpMethod.Post || method == HttpMethod.Put))
         {
             string? json;
