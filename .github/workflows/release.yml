@@ -14,9 +14,9 @@ jobs:
       with:
         ref: ${{ github.ref }}
     - run: dotnet restore
-    - run: chmod +x ./build-self-contained.sh
+    - run: chmod +x ./build.sh
       working-directory: scripts
-    - run: ./build-self-contained.sh
+    - run: ./build.sh
       working-directory: scripts
     - uses: svenstaro/upload-release-action@v2
       with:

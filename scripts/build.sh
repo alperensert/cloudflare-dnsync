@@ -7,7 +7,7 @@ runtimes=($(grep -o '<RuntimeIdentifiers>.*</RuntimeIdentifiers>' ../src/Cloudfl
 
 for runtime in "${runtimes[@]}"
 do
-   dotnet publish -c Release -r $runtime -o out/$runtime --self-contained true ../src/CloudflareDnsync.Cli/CloudflareDnsync.Cli.csproj
+   dotnet publish -c Release -r $runtime -o out/$runtime --self-contained false ../src/CloudflareDnsync.Cli/CloudflareDnsync.Cli.csproj
 done
 
 mkdir dist
