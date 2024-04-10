@@ -8,7 +8,7 @@ on:
 
 jobs:
   bump-version:
-    if: contains('["release-please"]', github.actor)
+    if: contains(github.head_ref, 'release-please--')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -16,14 +16,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-      - run: chmod +x ./scripts/bump-version.sh
-      - run: ./scripts/bump-version.sh
-      - id: determine_version
+      - id: retrieve_version
         run: echo "version=$(cat version.txt)" >> "$GITHUB_OUTPUT"
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: bump cli project version to ${{ steps.determine_version.outputs.version }}"
-          branch: ${{ github.head_ref }}
+      - run: chmod +x ./scripts/bump-version.sh
+      - run: ./bump-version.sh ${{ steps.retrieve_version.outputs.version }}
+        working-directory: scripts
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE_TO_COMMIT: src/CloudflareDnsync.Cli/CloudflareDnsync.Cli.csproj
+        run: |
+          export MESSAGE="chore: bump cli project version to ${{ steps.retrieve_version.outputs.version }}"
+          export SHA=$( git rev-parse ${{ github.head_ref }}:$FILE_TO_COMMIT )
+          export CONTENT=$( base64 -i $FILE_TO_COMMIT )
+          gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
+            --field message="$MESSAGE" \
+            --field content="$CONTENT" \
+            --field encoding="base64" \
+            --field branch="${{ github.head_ref }}" \
+            --field sha="$SHA"
 
 
   
