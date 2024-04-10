@@ -14,7 +14,7 @@ mkdir dist
 
 for runtime in "${runtimes[@]}"
 do
-   mv out/$runtime/cloudflare-dnsync dist/cloudflare-dnsync-$runtime-$version
+   mv out/$runtime/cloudflare-dnsync dist/cloudflare-dnsync-$runtime
 done
 
 rm -rf out
